@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="464b89f7-bad6-4d07-a1d5-73b7d241c3c2" ChangeDateTime="10/17/2021 14:17:10">
+    <Property Name="ElementName" Value="[dbo].[FK_Tasks_ToPlans]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[PendingTasks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_PendingTasks_ToPlans]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="30d7f816-a833-4743-a5cd-72b92a7fe090" ChangeDateTime="10/17/2021 14:17:20">
+    <Property Name="ElementName" Value="[dbo].[FK_Tasks_ToPriorities]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[PendingTasks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_PendingTasks_ToPriorities]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b69bc51b-47e7-4ccd-8d3d-abd66ae574b5" ChangeDateTime="10/17/2021 14:17:28">
+    <Property Name="ElementName" Value="[dbo].[FK_Tasks_ToStatus]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[PendingTasks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_PendingTasks_ToStatus]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="04ed7e40-d7c1-45e3-a48f-32121c6403ce" ChangeDateTime="10/17/2021 14:17:35">
+    <Property Name="ElementName" Value="[dbo].[FK_Tasks_ToTaskTypes]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[PendingTasks]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_PendingTasks_ToTaskTypes]" />
+  </Operation>
+</Operations>

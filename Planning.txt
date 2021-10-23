@@ -1,0 +1,58 @@
+Task Assistant
+
+1. Task
+	-Id
+	-Title
+	-Description
+	-PriorityId
+	-StatusId
+	-TaskTypeId
+	-ExpectedStartTime
+	-ExpectedFinishTime
+	-ActualStartTime
+	-ActualFinishTime
+	-PlanId
+	-CreatedAt
+	-UpdatedAt
+
+2. Priority
+	-Id
+	-Priority
+3. Status
+	-Id
+	-Status
+
+4. TaskType
+	-Id
+	-Type
+
+5. Plan
+	-Id
+	-Title
+	-Description
+	-UserId
+	-PlanTypeId
+	-StartTime
+	-FinishTime
+	-StatusId
+	-Duration
+	-CreatedAt
+	-UpdatedAt
+
+6.PlanType
+	-Id
+	-Title
+	-Description
+
+7. Users
+	-Id
+	-AuthId
+	-FirstName
+	-LastName
+	-EmailId
+	-Phone
+	-ProfilePic
+	-CreatedAt
+	-UpdatedAt
+
+

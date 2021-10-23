@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Statuses]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
+    [Status] NVARCHAR(50) NOT NULL, 
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT GetDate(), 
+    [UpdatedAt] DATETIME2 NULL
+)
