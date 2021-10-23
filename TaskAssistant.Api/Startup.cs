@@ -53,11 +53,16 @@ namespace TaskAssistant.Api
             // configure Custom Options like Auth, Email etc.
             services.ConfigureCustomOptions(Configuration.GetSection("AppSettings"));
 
+            // add HttpContextAccessor, avoid Static/Global use of HttpContext
+            services.AddHttpContextAccessor();
+
+            // DI Container --> Need to restructure
             services.AddScoped<IPendingTaskRepository, PendingTaskRepository>();
 
             services.AddScoped<IPendingTaskService, PendingTaskService>();
 
-            
+            services.AddScoped<IHttpContextService, HttpContextService>();
+
 
             DapperSetup.SetUpDapperExtensions();
 

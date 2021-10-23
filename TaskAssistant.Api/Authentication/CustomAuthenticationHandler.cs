@@ -3,11 +3,14 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Authentication;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using TaskAssistant.Api.Services.Interfaces;
 using TaskAssistant.Domain.Configuration;
 
 namespace TaskAssistant.Api.Authentication
@@ -18,6 +21,7 @@ namespace TaskAssistant.Api.Authentication
     public class CustomAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
         private readonly IOptions<AuthOptions> _authOptions;
+        private readonly IHttpContextService _httpContextService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomAuthenticationHandler"/> class.
@@ -26,16 +30,19 @@ namespace TaskAssistant.Api.Authentication
         /// <param name="logger">logger</param>
         /// <param name="encoder">encoder</param>
         /// <param name="clock">clock</param>
-        /// <param name="appSettings">appsettigns</param>
+        /// <param name="authOptions">appsettigns</param>
+        /// <param name="httpContextService">httpContextService</param>
         public CustomAuthenticationHandler(
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock,
-            IOptions<AuthOptions> authOptions)
+            IOptions<AuthOptions> authOptions,
+            IHttpContextService httpContextService)
             : base(options, logger, encoder, clock)
         {
             _authOptions = authOptions;
+            _httpContextService = httpContextService;
         }
 
         /// <summary>
@@ -46,18 +53,18 @@ namespace TaskAssistant.Api.Authentication
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            //if (Request.Headers.ContainsKey("X-Bypass-Login") &&
-            //    _httpContextService.BypassLogin())
-            //{
-            //    var claims = new List<Claim>
-            //    {
-            //        new Claim(ClaimTypes.Authentication, "TRUE")
-            //    };
-            //    var identity = new ClaimsIdentity(claims, "Bypass login claim");
-            //    var claimsPrincipal = new ClaimsPrincipal(identity);
-            //    var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
-            //    return AuthenticateResult.Success(ticket);
-            //}
+            if (Request.Headers.ContainsKey("X-Bypass-Login") &&
+                _httpContextService.BypassLogin())
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Authentication, "TRUE")
+                };
+                var identity = new ClaimsIdentity(claims, "Bypass login claim");
+                var claimsPrincipal = new ClaimsPrincipal(identity);
+                var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
+                return AuthenticateResult.Success(ticket);
+            }
 
             try
             {

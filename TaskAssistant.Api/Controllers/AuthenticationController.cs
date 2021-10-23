@@ -79,9 +79,10 @@ namespace TaskAssistant.Api.Controllers
 
             var output = new
             {
-                Access_Token = GenerateJWTToken(claims, DateTime.UtcNow.AddDays(tokenExpiryTime)),
+                AccessToken = GenerateJWTToken(claims, DateTime.UtcNow.AddDays(tokenExpiryTime)),
+                UserId = user.Id,
                 UserName = userName,
-                Roles = roles.Select(r => r.Name).ToList()
+                RolesIds = roles.ToDictionary(role=>role.RoleId, role=>role.Name)
             };
             return output;
         }
