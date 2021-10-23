@@ -63,6 +63,8 @@ namespace TaskAssistant.Api
 
             services.AddScoped<IHttpContextService, HttpContextService>();
 
+            services.AddScoped<ICustomAuthenticationService, CustomAuthenticationService>();
+
 
             DapperSetup.SetUpDapperExtensions();
 
