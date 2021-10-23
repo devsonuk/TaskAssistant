@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -5,8 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Text;
+using TaskAssistant.Api.Authentication;
 using TaskAssistant.Api.Data;
+using TaskAssistant.Api.Extensions.ServiceCollection;
 using TaskAssistant.Api.Services;
 using TaskAssistant.Api.Services.Interfaces;
 using TaskAssistant.Domain.Configuration;
@@ -35,7 +42,16 @@ namespace TaskAssistant.Api
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddScheme<AuthenticationSchemeOptions, CustomAuthenticationHandler>(JwtBearerDefaults.AuthenticationScheme, null);
+
+            // configure AppSettings object using appsettings.json
+
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            // configure Custom Options like Auth, Email etc.
+            services.ConfigureCustomOptions(Configuration.GetSection("AppSettings"));
 
             services.AddScoped<IPendingTaskRepository, PendingTaskRepository>();
 
@@ -73,7 +89,9 @@ namespace TaskAssistant.Api
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSwagger();
-            app.UseSwaggerUI(x => {
+
+            app.UseSwaggerUI(x =>
+            {
                 x.SwaggerEndpoint("/swagger/v1/swagger.json", "Task Assitant API v1");
             });
 

@@ -14,7 +14,7 @@ namespace TaskAssistant.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PendingTasksController : ControllerBase
+    public class PendingTasksController : BaseController
     {
         private readonly IPendingTaskService _pendingTaskService;
 

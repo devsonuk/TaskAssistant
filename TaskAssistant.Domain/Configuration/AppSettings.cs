@@ -18,5 +18,13 @@ namespace TaskAssistant.Domain.Configuration
         /// DB connection string
         /// </value>
         public ConnectionStrings ConnectionStrings { get; set; }
+
+        /// <summary>
+        /// Gets or sets AuthOptions
+        /// </summary>
+        /// <value>
+        ///     AuthOptions object
+        /// </value>
+        public AuthOptions AuthOptions { get; set; }
     }
 }

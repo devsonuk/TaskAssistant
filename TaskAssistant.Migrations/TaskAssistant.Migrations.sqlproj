@@ -61,9 +61,11 @@
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\Stored Procedures" />
     <Folder Include="PublishedLocation" />
+    <Folder Include="dbo\Scripts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishedLocation\TaskAssistant.Migrations.publish.xml" />
+    <None Include="dbo\Scripts\InsertData.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Users.sql" />
