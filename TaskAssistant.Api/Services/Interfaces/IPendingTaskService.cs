@@ -5,6 +5,14 @@ namespace TaskAssistant.Api.Services.Interfaces
 {
     public interface IPendingTaskService
     {
-        List<PendingTask> GetPendingTasks();
+        List<PendingTask> GetAll();
+
+        PendingTask Get(int id);
+
+        long Add(PendingTask pendingTask);
+
+        bool Update(PendingTask pendingTask);
+
+        void Delete(int id);
     }
 }

@@ -9,6 +9,7 @@ namespace TaskAssistant.Domain.Entities
     public class PendingTask : BaseEntity
     {
         public string Title { get; set; }
+        public string Description { get; set; }
         public int PriorityId { get; set; }
         public int StatusId { get; set; }
         public int TaskTypeId { get; set; }
@@ -17,7 +18,7 @@ namespace TaskAssistant.Domain.Entities
         public DateTime? ActualStartTime { get; set; }
         public DateTime? ActualFinishTime { get; set; }
         public int PlanId { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
 }

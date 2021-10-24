@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
@@ -10,6 +11,7 @@ using TaskAssistant.Domain.Configuration;
 
 namespace TaskAssistant.Api.Controllers
 {
+    [Produces("application/json")]
     [Route("[controller]/[action]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
@@ -31,6 +33,7 @@ namespace TaskAssistant.Api.Controllers
             _authenticationService = authenticationService;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] Login loginModel)
         {
